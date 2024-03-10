@@ -50,3 +50,4 @@ class TestRegistration:
         driver.find_element(*Locators.BUTTON_REGIST).click()
         # ловим ошибку "Некорректный пароль"
         assert driver.find_element(By.XPATH, "//*[text()='Некорректный пароль']").is_displayed()
+

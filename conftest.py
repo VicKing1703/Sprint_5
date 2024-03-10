@@ -24,3 +24,4 @@ def login(driver):
     driver.find_element(*Locators.INPUT_PASSWORD).send_keys("123456")
     driver.find_element(*Locators.BUTTON_IN).click()
     return driver
+

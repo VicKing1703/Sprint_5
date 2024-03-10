@@ -45,3 +45,4 @@ class TestLogin:
         driver.find_element(*Locators.BUTTON_IN).click()
         assert WebDriverWait(driver, 5).until(expected_conditions.text_to_be_present_in_element(
             Locators.BUTTON_ORDER, "Оформить заказ"))
+

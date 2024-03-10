@@ -29,3 +29,4 @@ class TestPersonalAccount:
         driver.find_element(*Locators.KEY_LOGO).click()
         assert WebDriverWait(driver, 5).until(
             expected_conditions.element_to_be_clickable((By.XPATH, "//h1[contains(text(),'Соберите бургер')]")))
+

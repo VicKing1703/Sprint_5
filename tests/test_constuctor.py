@@ -16,3 +16,4 @@ class TestConstructor:
     def test_constructor_transitions_to_sections_filling(self, driver):
         driver.find_element(*Locators.KEY_FILLING).click()
         assert driver.find_element(*Locators.FILLING_LIST).is_displayed()
+
