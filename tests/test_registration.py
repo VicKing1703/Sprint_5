@@ -21,7 +21,7 @@ class TestRegistration:
         # нажимаем кнопку "Зарегестрироваться"
         driver.find_element(*Locators.KEY_REGISTRATION).click()
         # вводим данные для регистрации, используя переменные email и password
-        driver.find_element(*Locators.INPUT_NAME).send_keys('Гость')
+        driver.find_element(*Locators.INPUT_NAME).send_keys(Constants.TEST_NAME)
         driver.implicitly_wait(3)
         driver.find_element(*Locators.INPUT_EMAIL_REG).send_keys(email)
         driver.find_element(*Locators.INPUT_PASSWORD_REG).send_keys(password)
