@@ -1,9 +1,9 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from locators import Locators
 from conftest import driver
 from randomizer import generate_random_email, random_password
+from constants import Constants
 
 
 class TestRegistration:
@@ -21,14 +21,15 @@ class TestRegistration:
         # нажимаем кнопку "Зарегестрироваться"
         driver.find_element(*Locators.KEY_REGISTRATION).click()
         # вводим данные для регистрации, используя переменные email и password
-        driver.find_element(*Locators.INPUT_NAME).send_keys("Гость")
+        driver.find_element(*Locators.INPUT_NAME).send_keys('Гость')
+        driver.implicitly_wait(3)
         driver.find_element(*Locators.INPUT_EMAIL_REG).send_keys(email)
         driver.find_element(*Locators.INPUT_PASSWORD_REG).send_keys(password)
         driver.find_element(*Locators.BUTTON_REGIST).click()
 
         # переход на экран логина после нажатия кнопки "Зарегестрироваться"
         WebDriverWait(driver, 3).until(
-            expected_conditions.presence_of_element_located((By.XPATH, "//h2[contains(text(),'Вход')]")))
+            expected_conditions.presence_of_element_located(Locators.LABLE_LOGIN))
         # вводим данные из регистрации
         driver.find_element(*Locators.INPUT_EMAIL).send_keys(email)
         driver.find_element(*Locators.INPUT_PASSWORD_REG).send_keys(password)
@@ -43,11 +44,10 @@ class TestRegistration:
         password = random_password(5)
         driver.find_element(*Locators.BUTTON_LOGIN).click()
         driver.find_element(*Locators.KEY_REGISTRATION).click()
-        driver.find_element(*Locators.INPUT_NAME).send_keys("Гость")
+        driver.find_element(*Locators.INPUT_NAME).send_keys(Constants.TEST_NAME)
         driver.find_element(*Locators.INPUT_EMAIL_REG).send_keys(email)
         # вводим пароль менее 6 символов
         driver.find_element(*Locators.INPUT_PASSWORD).send_keys(password)
         driver.find_element(*Locators.BUTTON_REGIST).click()
         # ловим ошибку "Некорректный пароль"
-        assert driver.find_element(By.XPATH, "//*[text()='Некорректный пароль']").is_displayed()
-
+        assert driver.find_element(*Locators.ERROR_PASSWORD).is_displayed()
